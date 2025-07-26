@@ -1,40 +1,25 @@
-from django.test import SimpleTestCase
+from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
+from . import models
 
 
 # Create your tests here.
-class HomePageTests(SimpleTestCase):
+class PostTests(TestCase):
+    @classmethod
+    def setUpTestData(self):
+        self.post = models.Post.objects.create(text='This is a test!')
+
+    def test_model_content(self):
+        self.assertEqual(self.post.text, 'This is a test!')
+
     def test_url_exists_at_correct_location(self):
         response = self.client.get('/')
         self.assertEqual(response.status_code, 200)
 
-    def test_url_available_by_name(self):
-        response = self.client.get(reverse("pages:home"))
-        self.assertEqual(response.status_code, 200)
-
-    def test_template_name_correct(self): 
-        response = self.client.get(reverse("pages:home"))
-        self.assertTemplateUsed(response, "pages/home.html")
-
-    def test_template_content(self): 
-        response = self.client.get(reverse("pages:home"))
-        self.assertContains(response, "<h1>Home page</h1>")
+    def test_homepage(self):                    # combined tests
+        response = self.client.get(reverse('pages:home'))
+        self.assertEqual(response.status_code, 200)                 # response status code
+        self.assertTemplateUsed(response, 'pages/home.html')        # template name
+        self.assertContains(response, 'This is a test!')            # response contains
 
 
-
-class AboutPageTests(SimpleTestCase):
-    def test_url_exists_at_location(self):
-        response = self.client.get('/about/')                   # tests url location
-        self.assertEqual(response.status_code, 200)
-
-    def test_url_available_by_name(self): 
-        response = self.client.get(reverse("pages:about"))      # tests url name
-        self.assertEqual(response.status_code, 200)
-
-    def test_template_name_correct(self): 
-        response = self.client.get(reverse("pages:about"))
-        self.assertTemplateUsed(response, "pages/about.html")
-    
-    def test_template_content(self):
-        response = self.client.get(reverse("pages:about"))
-        self.assertContains(response, "<h1>About page</h1>")
