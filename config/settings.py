@@ -23,9 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%a$5$i01*)0$=apx@kp=tx7bw55g+u*e7lg#6)*fr134-4y&vt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# DEBUG = False
 DEBUG = True
-
-ALLOWED_HOSTS = ['.onrender.com']
+ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['.onrender.com']
 
 
 # Application definition
@@ -117,7 +118,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
