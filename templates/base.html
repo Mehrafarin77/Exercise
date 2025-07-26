@@ -4,22 +4,31 @@
     <head>
         <title>Django blog</title>
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
-            <link
-                href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
-                rel="stylesheet"></head>
-            <body>
-                <header>
-                    <div class="nav-left">
-                        <h1>
-                            <a href="{% url 'pages:posts' %}">Django blog</a>
-                        </h1>
-                    </div>
-                    <div class="nav-right">
-                        <a href="{% url 'pages:post_new' %}">+ New Blog Post</a>
-                    </div>
-                </header>
-                <div>
-                    {% block content %}{% endblock content %}
-                </div>
-            </body>
-        </html>
+        <link
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400"
+            rel="stylesheet"></head>
+    <body>
+        <header>
+            <div class="nav-left">
+                <h1>
+                    <a href="{% url 'pages:posts' %}">Django blog</a>
+                </h1>
+            </div>
+            <div class="nav-right">
+                <a href="{% url 'pages:post_new' %}">+ New Blog Post</a>
+            </div>
+        </header>
+        {% if user.is_authenticated %}
+            <p>Hi {{ user.username }}
+            <a href="{% url 'logout' %}">Log Out</a>
+            </p>
+        {% else %}
+            <p>You are not logged in.</p>
+            <a href="{% url 'login' %}">Log In</a> |
+            <a href="{% url 'accounts:signup' %}">Sign Up</a>
+        {% endif %}
+        <div>
+            {% block content %}{% endblock content %}
+        </div>
+    </body>
+</html>
