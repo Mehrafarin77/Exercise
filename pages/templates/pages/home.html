@@ -1,17 +1,12 @@
-{% extends 'base.html' %}
-
+{% extends "base.html" %}
 
 {% block content %}
-    <h1>Home page</h1>
-    {% if post_list %}
-        <ul>
-            {% for post in post_list %}
-                <li>
-                    <a href="">{{ post.text }}</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No posts yet.</p>
-    {% endif %}
-{% endblock %}
+    {% for post in post_list %}
+        <div class="post-entry">
+            <h2>
+                <a href="{% url 'pages:post_detail' post.id %}">{{ post.title }}</a>
+            </h2>
+            <p>{{ post.text }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}

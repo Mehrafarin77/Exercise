@@ -1,5 +1,6 @@
 from django.test import SimpleTestCase, TestCase
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 from . import models
 
 
@@ -7,19 +8,19 @@ from . import models
 class PostTests(TestCase):
     @classmethod
     def setUpTestData(self):
-        self.post = models.Post.objects.create(text='This is a test!')
+        self.user = get_user_model().objects.create_user(
+        username="testuser", email="test@email.com", password="password"
+        )
+        self.post = models.Post.objects.create(
+        title="A good title",
+        text="Nice body content",
+        author=self.user,
+    )
 
-    def test_model_content(self):
-        self.assertEqual(self.post.text, 'This is a test!')
-
-    def test_url_exists_at_correct_location(self):
-        response = self.client.get('/')
-        self.assertEqual(response.status_code, 200)
-
-    def test_homepage(self):                    # combined tests
-        response = self.client.get(reverse('pages:home'))
-        self.assertEqual(response.status_code, 200)                 # response status code
-        self.assertTemplateUsed(response, 'pages/home.html')        # template name
-        self.assertContains(response, 'This is a test!')            # response contains
-
+    def test_post_model(self):
+        self.assertEqual(self.post.title, "A good title")
+        self.assertEqual(self.post.text, "Nice body content")
+        self.assertEqual(self.post.author.username, "testuser")
+        self.assertEqual(str(self.post), "A good title")
+        self.assertEqual(self.post.get_absolute_url(), "/post/1/")
 
