@@ -23,10 +23,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-%a$5$i01*)0$=apx@kp=tx7bw55g+u*e7lg#6)*fr134-4y&vt'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-DEBUG = True
-ALLOWED_HOSTS = []
-# ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://exercise-iiq8.onrender.com']
+DEBUG = False
+# DEBUG = True
+# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://exercise-iiq8.onrender.com']
 
 
 # Application definition
