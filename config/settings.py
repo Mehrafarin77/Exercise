@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-%a$5$i01*)0$=apx@kp=tx7bw55g+u*e7lg#6)*fr134-4y&vt
 DEBUG = False
 # DEBUG = True
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'https://exercise-iiq8.onrender.com']
-
+ALLOWED_HOSTS = ['https://exercise-iiq8.onrender.com/', 'localhost', '127.0.0.1']
 
 # Application definition
 
